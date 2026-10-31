@@ -1,0 +1,38 @@
+{
+  "variants": [
+    {
+      "name": "openrouter-dead-lane",
+      "bytes": 738339,
+      "lines": 420,
+      "hash": "d4397b38",
+      "notes": "49 active models, 16 nvidia dead (404). All :free variants dead."
+    },
+    {
+      "name": "rhodochrosite-505",
+      "bytes": 133105,
+      "lines": 505,
+      "hash": "ddba0835",
+      "notes": "505 models, 15 nemotrons alive. Full catalog via nvidia-secure-nim."
+    }
+  ],
+  "pairs": [
+    {
+      "a": "openrouter-dead-lane",
+      "b": "rhodochrosite-505",
+      "modelOverlap": 408,
+      "openrouterOnly": 12,
+      "rhodochrositeOnly": 97,
+      "deadOpenrouterModels": [
+        "nvidia/nemotron-3-super-120b-a12b",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "nvidia/nemotron-3-ultra-550b-a55b",
+        "inclusionai/ling-3.0-flash-fin",
+        "nvidia/nemotron-3.5-lightning:free"
+      ],
+      "nvidiaModelsOnOr": 12,
+      "nvidiaModelsOnRc": 18,
+      "nemotronModelsOnOr": 11,
+      "nemotronModelsOnRc": 15
+    }
+  ]
+}

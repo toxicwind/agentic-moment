@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Agentic Moment — Log helper: Datadog vs open-source collectors</title>
+<style>
+:root{ --ink:#e8e4d8; --dim:#9a9488; --faint:#3a382f; --accent:#c9a227; --red:#b3402e; --blue:#5a6b8a; --bg:#0d0c0a; --card:#141310; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{ background:var(--bg); color:var(--ink); font:15px/1.55 ui-monospace,monospace; padding:2rem; max-width:1100px; margin:0 auto }
+h1{ font-size:1.3rem; letter-spacing:.08em; color:var(--accent); margin-bottom:.3rem }
+h2{ font-size:.95rem; letter-spacing:.1em; color:var(--dim); margin:1.6rem 0 .6rem; text-transform:uppercase }
+.sub{ color:var(--dim); margin-bottom:1.6rem; font-size:.85rem }
+table{ border-collapse:collapse; width:100%; font-size:.8rem }
+th,td{ border:1px solid var(--faint); padding:.45rem .7rem; text-align:left }
+th{ color:var(--dim); font-weight:normal; text-transform:uppercase; font-size:.7rem; letter-spacing:.1em }
+td.metric{ text-align:right; font-variant-numeric:tabular-nums }
+.heat{ display:inline-block; width:3.2em; height:.7em; border-radius:2px; vertical-align:middle; margin-right:.5em }
+.kind-import-alias{ color:var(--blue) } .kind-type-annotation{ color:var(--accent) } .kind-modified{ color:var(--ink) } .kind-removed{ color:var(--red) } .kind-added{ color:#7ee787 }
+details{ margin:.4rem 0; border:1px solid var(--faint); border-radius:6px; padding:.5rem .8rem; background:var(--card) }
+summary{ cursor:pointer; color:var(--dim); font-size:.8rem }
+.diff{ margin:.6rem 0; font-size:.78rem; line-height:1.6 }
+.rollup{ margin-top:1.2rem; color:var(--dim); font-size:.82rem; line-height:1.9 }
+.rollup b{ color:var(--ink) }
+a{ color:var(--accent) }
+</style>
+</head>
+<body>
+<h1>Log helper: Datadog vs open-source collectors</h1>
+<p class="sub">algorithmic variant comparison — token · ast · semantic layers · <a href="index.html">← compare lab</a></p>
+<h2>variants</h2>
+<table><thead><tr><th>name</th><th>bytes</th><th>lines</th><th>hash</th></tr></thead><tbody><tr><td>datadog-agents</td><td class="metric">1401</td><td class="metric">22</td><td class="metric">9eff5d89</td></tr><tr><td>otel-collector</td><td class="metric">2400</td><td class="metric">50</td><td class="metric">1f47i8e2</td></tr><tr><td>vector</td><td class="metric">2400</td><td class="metric">40</td><td class="metric">77aa1c03</td></tr><tr><td>grafana-loki</td><td class="metric">2400</td><td class="metric">29</td><td class="metric">8b3c2044</td></tr><tr><td>signoz</td><td class="metric">2400</td><td class="metric">41</td><td class="metric">5e9a2d55</td></tr></tbody></table>
+<h2>matrix</h2>
+<table>
+<thead><tr><th>variant A</th><th>variant B</th><th>token jaccard</th><th>ast jaccard</th><th>semantic ratio</th></tr></thead>
+<tbody><tr>
+<td>datadog-agents</td>
+<td>otel-collector</td>
+<td class="metric"><span class="heat" style="background:#b3402e"></span>0.0%</td>
+<td class="metric">0.0%</td>
+<td class="metric">0.0%</td>
+</tr></tbody>
+</table>
+
+<div class="rollup"><b>canonical guess:</b> otel-collector</div>
+<div class="rollup"><b>decision:</b> Decision by compare: Datadog is a proprietary isolate (0.000 semantic vs every OSS candidate). OSS cluster (otel-collector/vector/signoz) shares a real semantic core (0.13-0.16). CanonicalGuess picks otel-collector -&gt; adopt OpenTelemetry Collector as the log-helper product (OSS, maximally-typed, drops into argos/ES, dedupe-friendly data-framed JSON-lines by default).</div>
+<h2>changed lines</h2>
+<details><summary>datadog-agents ↔ otel-collector — 3 changed lines</summary><div class="diff" style="color:#7ee787">+ The OpenTelemetry Collector offers a vendor-agnostic implementation on how to receive, process and export telemetry data. It removes the need to run, operate and maintain multiple agents, collectors, or backends in order to support open-source observability data formats (e.g. Jaeger, Prometheus, Fluent Bit, etc.) sending to one or more open-source or commercial backends.</div><div class="diff" style="color:#7ee787">+ Read more about the Collector in the o11y guide. This project does not ship any binaries; instead it is broken down into components that are grouped into a distribution with its own versioning and release cycle. To get started with a specific distribution, see the full list of distributions and the pre-build components.</div><div class="diff" style="color:#7ee787">+ The Collector features several possible deployment approaches: as an agent (running with the application or on the same host as the application), as a gateway (a standalone service typically running per cluster, virtual machine, or data center), or as both (agent and gateway).</div></details>
+</body>
+</html>

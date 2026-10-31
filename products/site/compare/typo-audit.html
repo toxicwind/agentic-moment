@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Typo Audit — a self-observation on input</title>
+<style>
+  :root{ --ink:#e8e4d8; --dim:#8a857a; --faint:#3a382f; --accent:#c9a227; --red:#b3402e; --blue:#5a6b8a; --bg:#0d0c0a; --card:#141310; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{ background:var(--bg); color:var(--ink); font:15px/1.6 ui-monospace,Menlo,monospace; min-height:100vh }
+  .wrap{max-width:980px;margin:0 auto;padding:4rem 1.5rem 7rem}
+  header{text-align:center;margin-bottom:3.5rem;border-bottom:1px solid var(--faint);padding-bottom:2.5rem}
+  h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:400;letter-spacing:.01em;background:linear-gradient(120deg,var(--ink),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--dim);margin-top:.8rem}
+  .meta{color:var(--faint);font-size:.8rem;margin-top:1.4rem;line-height:1.8}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.1rem;margin:2.5rem 0}
+  .stat{background:var(--card);border:1px solid var(--faint);border-radius:8px;padding:1.2rem 1.4rem}
+  .stat .n{font-size:2rem;color:var(--accent)}
+  .stat .l{color:var(--dim);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+  section{margin:3rem 0}
+  h2{font-size:1.25rem;font-weight:500;color:var(--accent);margin-bottom:1.2rem;border-left:3px solid var(--accent);padding-left:.8rem}
+  table{width:100%;border-collapse:collapse}
+  th{color:var(--dim);text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;padding:.5rem .8rem;border-bottom:1px solid var(--faint)}
+  td{padding:.55rem .8rem;border-bottom:1px solid #1c1a17}
+  td.typo{color:#e89c6a}
+  td.arrow{color:var(--faint)}
+  td.target{color:var(--ink)}
+  td.n{color:var(--dim);text-align:right}
+  .bar{height:6px;background:var(--faint);border-radius:3px;overflow:hidden;display:block}
+  .bar i{display:block;height:100%;background:var(--accent)}
+  .mech-row{display:grid;grid-template-columns:140px 1fr 70px;align-items:center;gap:1rem;padding:.55rem 0;border-bottom:1px solid #1c1a17}
+  .mech-row .m{color:var(--ink)}
+  .mech-row .pct{color:var(--accent);font-size:.8rem;text-align:right}
+  .note{color:var(--dim);font-size:.85rem;border:1px solid var(--faint);border-radius:8px;padding:1rem 1.2rem;background:var(--card);line-height:1.7}
+  footer{color:var(--faint);font-size:.75rem;margin-top:4rem;text-align:center;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>The Typo Audit</h1>
+    <p class="sub">a self-observation on input — 42,762 messages, 6,274 near-miss typos</p>
+    <p class="meta">source <b>~/.tau/agent/sessions/*.jsonl</b> · 642 sessions · method: self-vocabulary (vocab = tokens typed ≥10&times;) · a typo = a rare token single-edit from the operator&rsquo;s own confident vocabulary · no external dictionary bias
+    <br>vocabulary <b>16,080</b> tokens · classified signals <b>25,238</b> occurrences</p>
+  </header>
+
+  <div class="grid">
+    <div class="stat"><div class="n">42,762</div><div class="l">user messages</div></div>
+    <div class="stat"><div class="n">16,080</div><div class="l">confident vocabulary</div></div>
+    <div class="stat"><div class="n">6,274</div><div class="l">near-miss tokens</div></div>
+    <div class="stat"><div class="n">25,238</div><div class="l">typo occurrences</div></div>
+  </div>
+
+  <section>
+    <h2>Mechanism distribution</h2>
+    <div class="mech-list"></div>
+  </section>
+
+  <section>
+    <h2>Genuine mobile signatures</h2>
+    <p class="note" style="margin-bottom:1rem">Unambiguous phone-typing transpositions and fat-fingers — the same root misspelled against a common word:</p>
+    <table class="genuine"></table>
+  </section>
+
+  <section>
+    <h2>Breakdown by mechanism — top offenders</h2>
+    <div class="mechTables"></div>
+  </section>
+
+  <footer>
+    reproducible: <code>node bin/mobile-typo-audit.mjs /tmp/tau-user-messages.txt fixtures/typo-audit.json</code><br>
+    fixtures pinned from a real run — never hand-edited · part of the agentic-moment pen
+  </footer>
+</div>
+
+<script>
+const FIXTURE = {
+  "report": {
+    "source": "~/.tau/agent/sessions/*.jsonl",
+    "files": 642,
+    "userMessages": 42762,
+    "generatedAt": "2026-10-31T05:01:02.576Z",
+    "method": "self-vocabulary: vocab = tokens used >=10x (no external dict bias); typo = rare token (2..9x) single-edit from own vocab; mechanism = substitution/neighbor-key/transposition/letter-drop/insertion; realMobile = hand-flagged unambiguous signatures (transposition/neighbor of common words)",
+    "vocabSize": 16080,
+    "hits": 6274
+  },
+  "distribution": [
+    {
+      "mechanism": "substitution",
+      "total": 12993
+    },
+    {
+      "mechanism": "letter-drop",
+      "total": 6778
+    },
+    {
+      "mechanism": "neighbor-key",
+      "total": 3770
+    },
+    {
+      "mechanism": "insertion",
+      "total": 1470
+    },
+    {
+      "mechanism": "transposition",
+      "total": 227
+    }
+  ],
+  "byMechanism": {
+    "substitution": {
+      "total": 12993,
+      "top": [
+        {
+          "typo": "unload",
+          "target": "onload",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "cmon",
+          "target": "cron",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "deserve",
+          "target": "reserve",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "lacking",
+          "target": "backing",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "alike",
+          "target": "alice",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "election",
+          "target": "electron",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "omitting",
+          "target": "emitting",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "flo",
+          "target": "elo",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "alsp",
+          "target": "alsa",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "shots",
+          "target": "slots",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "chr",
+          "target": "thr",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "curls",
+          "target": "ctrls",
+          "n": 9,
+          "mechanism": "substitution"
+        }
+      ]
+    },
+    "neighbor-key": {
+      "total": 3770,
+      "top": [
+        {
+          "typo": "updste",
+          "target": "update",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "coreect",
+          "target": "correct",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "onde",
+          "target": "once",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "reproduces",
+          "target": "reproduced",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "principled",
+          "target": "principles",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "substituted",
+          "target": "substitutes",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "freeing",
+          "target": "freeinf",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "accelerates",
+          "target": "accelerated",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "relocates",
+          "target": "relocated",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "earned",
+          "target": "warned",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "fsster",
+          "target": "faster",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "twv",
+          "target": "tsv",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        }
+      ]
+    },
+    "letter-drop": {
+      "total": 6778,
+      "top": [
+        {
+          "typo": "continuations",
+          "target": "continuation",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "hardens",
+          "target": "harden",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "complaints",
+          "target": "complaint",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "vila",
+          "target": "via",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "nwall",
+          "target": "wall",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "providerdefs",
+          "target": "providerdef",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "hacky",
+          "target": "hack",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "pcpu",
+          "target": "cpu",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "facet",
+          "target": "fact",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "emerges",
+          "target": "merges",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "substitutions",
+          "target": "substitution",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "explores",
+          "target": "explore",
+          "n": 9,
+          "mechanism": "letter-drop"
+        }
+      ]
+    },
+    "transposition": {
+      "total": 227,
+      "top": [
+        {
+          "typo": "clien",
+          "target": "cline",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "moonrepo",
+          "target": "monorepo",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "thersher",
+          "target": "thresher",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "annos",
+          "target": "nanos",
+          "n": 7,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "coreleec",
+          "target": "coreelec",
+          "n": 7,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "jsut",
+          "target": "just",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "perferred",
+          "target": "preferred",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "hmdi",
+          "target": "hdmi",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "unist",
+          "target": "units",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "fdeb",
+          "target": "fedb",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "disbale",
+          "target": "disable",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "dobly",
+          "target": "dolby",
+          "n": 6,
+          "mechanism": "transposition"
+        }
+      ]
+    },
+    "insertion": {
+      "total": 1470,
+      "top": [
+        {
+          "typo": "includ",
+          "target": "include",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "resol",
+          "target": "resolv",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "disappear",
+          "target": "disappears",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "depenencies",
+          "target": "dependencies",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "deobfuscate",
+          "target": "deobfuscated",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "outpu",
+          "target": "output",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "reactor",
+          "target": "refactor",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "vital",
+          "target": "vitals",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "sessio",
+          "target": "session",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "tostrin",
+          "target": "tostring",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "consol",
+          "target": "console",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "gayxx",
+          "target": "gayxxx",
+          "n": 9,
+          "mechanism": "insertion"
+        }
+      ]
+    }
+  },
+  "realMobileTypoCount": 13,
+  "topGenuine": [
+    {
+      "typo": "coreleec",
+      "target": "coreelec"
+    },
+    {
+      "typo": "thersher",
+      "target": "thresher"
+    },
+    {
+      "typo": "jsut",
+      "target": "just"
+    },
+    {
+      "typo": "hmdi",
+      "target": "hdmi"
+    },
+    {
+      "typo": "perferred",
+      "target": "preferred"
+    },
+    {
+      "typo": "depenencies",
+      "target": "dependencies"
+    },
+    {
+      "typo": "updste",
+      "target": "update"
+    },
+    {
+      "typo": "coreect",
+      "target": "correct"
+    },
+    {
+      "typo": "outpu",
+      "target": "output"
+    }
+  ]
+};
+
+const mechNames = {
+  "neighbor-key": "neighbor-key (adjacent key)",
+  "letter-drop": "letter-drop",
+  "substitution": "substitution (non-adjacent)",
+  "insertion": "insertion",
+  "transposition": "transposition",
+};
+const mechColor = {
+  "neighbor-key":"#c9a227","letter-drop":"#b3402e","substitution":"#5a6b8a","insertion":"#e89c6a","transposition":"#7aa2f7"
+};
+
+// distribution bars
+const maxTotal = Math.max(...FIXTURE.distribution.map(d=>d.total));
+document.querySelector(".mech-list").innerHTML = FIXTURE.distribution.map(d=>`
+  <div class="mech-row">
+    <span class="m">${mechNames[d.mechanism]||d.mechanism}</span>
+    <span class="bar"><i style="width:${(d.total/maxTotal*100).toFixed(1)}%;background:${mechColor[d.mechanism]||"#c9a227"}"></i></span>
+    <span class="pct">${d.total.toLocaleString()} · ${(d.total/25238*100).toFixed(1)}%</span>
+  </div>`).join("");
+
+// genuine
+document.querySelector(".genuine").innerHTML =
+  `<tr><th>typo</th><th></th><th>intended</th></tr>` +
+  FIXTURE.topGenuine.map(g=>`<tr><td class="typo">${g.typo}</td><td class="arrow">&rarr;</td><td class="target">${g.target}</td></tr>`).join("");
+
+// per mechanism tables
+document.querySelector(".mechTables").innerHTML = Object.entries(FIXTURE.byMechanism).map(([m,v])=>`
+  <p style="margin:1.4rem 0 .6rem;color:var(--accent);font-size:.95rem">${mechNames[m]||m} <span style="color:var(--dim);font-size:.8rem">(${v.total.toLocaleString()} occurrences)</span></p>
+  <table>
+    <tr><th>typo</th><th></th><th>intended</th><th style="text-align:right">n</th></tr>
+    ${v.top.map(t=>`<tr><td class="typo">${t.typo}</td><td class="arrow">&rarr;</td><td class="target">${t.target}</td><td class="n">${t.n.toLocaleString()}</td></tr>`).join("")}
+  </table>`).join("");
+
+// distribution embedded footer
+document.body.insertAdjacentHTML('beforeend',`<div style="display:none">${JSON.stringify(FIXTURE.distribution)}</div>`);
+</script>
+</body>
+</html>

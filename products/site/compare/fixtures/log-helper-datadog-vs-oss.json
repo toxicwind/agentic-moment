@@ -1,0 +1,63 @@
+{
+  "variants": [
+    {
+      "name": "datadog-agents",
+      "bytes": 1401,
+      "lines": 22,
+      "hash": "9eff5d89"
+    },
+    {
+      "name": "otel-collector",
+      "bytes": 2400,
+      "lines": 50,
+      "hash": "1f47i8e2"
+    },
+    {
+      "name": "vector",
+      "bytes": 2400,
+      "lines": 40,
+      "hash": "77aa1c03"
+    },
+    {
+      "name": "grafana-loki",
+      "bytes": 2400,
+      "lines": 29,
+      "hash": "8b3c2044"
+    },
+    {
+      "name": "signoz",
+      "bytes": 2400,
+      "lines": 41,
+      "hash": "5e9a2d55"
+    }
+  ],
+  "pairs": [
+    {
+      "a": "datadog-agents",
+      "b": "otel-collector",
+      "tokenJaccard": 0,
+      "astJaccard": 0,
+      "semanticRatio": 0,
+      "changedLines": [
+        {
+          "kind": "added",
+          "b": "The OpenTelemetry Collector offers a vendor-agnostic implementation on how to receive, process and export telemetry data. It removes the need to run, operate and maintain multiple agents, collectors, or backends in order to support open-source observability data formats (e.g. Jaeger, Prometheus, Fluent Bit, etc.) sending to one or more open-source or commercial backends."
+        },
+        {
+          "kind": "added",
+          "b": "Read more about the Collector in the o11y guide. This project does not ship any binaries; instead it is broken down into components that are grouped into a distribution with its own versioning and release cycle. To get started with a specific distribution, see the full list of distributions and the pre-build components."
+        },
+        {
+          "kind": "added",
+          "b": "The Collector features several possible deployment approaches: as an agent (running with the application or on the same host as the application), as a gateway (a standalone service typically running per cluster, virtual machine, or data center), or as both (agent and gateway)."
+        }
+      ]
+    }
+  ],
+  "identicalGroups": [],
+  "canonicalGuess": "otel-collector",
+  "_provenance": {
+    "source": "repo-compare (trio)",
+    "capturedAt": "2026-10-31T05:03:27.294Z"
+  }
+}

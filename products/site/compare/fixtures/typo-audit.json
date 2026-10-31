@@ -1,0 +1,459 @@
+{
+  "report": {
+    "source": "~/.tau/agent/sessions/*.jsonl",
+    "files": 642,
+    "userMessages": 42762,
+    "generatedAt": "2026-10-31T05:01:02.576Z",
+    "method": "self-vocabulary: vocab = tokens used >=10x (no external dict bias); typo = rare token (2..9x) single-edit from own vocab; mechanism = substitution/neighbor-key/transposition/letter-drop/insertion; realMobile = hand-flagged unambiguous signatures (transposition/neighbor of common words)",
+    "vocabSize": 16080,
+    "hits": 6274
+  },
+  "distribution": [
+    {
+      "mechanism": "substitution",
+      "total": 12993
+    },
+    {
+      "mechanism": "letter-drop",
+      "total": 6778
+    },
+    {
+      "mechanism": "neighbor-key",
+      "total": 3770
+    },
+    {
+      "mechanism": "insertion",
+      "total": 1470
+    },
+    {
+      "mechanism": "transposition",
+      "total": 227
+    }
+  ],
+  "byMechanism": {
+    "substitution": {
+      "total": 12993,
+      "top": [
+        {
+          "typo": "unload",
+          "target": "onload",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "cmon",
+          "target": "cron",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "deserve",
+          "target": "reserve",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "lacking",
+          "target": "backing",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "alike",
+          "target": "alice",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "election",
+          "target": "electron",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "omitting",
+          "target": "emitting",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "flo",
+          "target": "elo",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "alsp",
+          "target": "alsa",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "shots",
+          "target": "slots",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "chr",
+          "target": "thr",
+          "n": 9,
+          "mechanism": "substitution"
+        },
+        {
+          "typo": "curls",
+          "target": "ctrls",
+          "n": 9,
+          "mechanism": "substitution"
+        }
+      ]
+    },
+    "neighbor-key": {
+      "total": 3770,
+      "top": [
+        {
+          "typo": "updste",
+          "target": "update",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "coreect",
+          "target": "correct",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "onde",
+          "target": "once",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "reproduces",
+          "target": "reproduced",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "principled",
+          "target": "principles",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "substituted",
+          "target": "substitutes",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "freeing",
+          "target": "freeinf",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "accelerates",
+          "target": "accelerated",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "relocates",
+          "target": "relocated",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "earned",
+          "target": "warned",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "fsster",
+          "target": "faster",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        },
+        {
+          "typo": "twv",
+          "target": "tsv",
+          "n": 9,
+          "mechanism": "neighbor-key"
+        }
+      ]
+    },
+    "letter-drop": {
+      "total": 6778,
+      "top": [
+        {
+          "typo": "continuations",
+          "target": "continuation",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "hardens",
+          "target": "harden",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "complaints",
+          "target": "complaint",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "vila",
+          "target": "via",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "nwall",
+          "target": "wall",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "providerdefs",
+          "target": "providerdef",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "hacky",
+          "target": "hack",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "pcpu",
+          "target": "cpu",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "facet",
+          "target": "fact",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "emerges",
+          "target": "merges",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "substitutions",
+          "target": "substitution",
+          "n": 9,
+          "mechanism": "letter-drop"
+        },
+        {
+          "typo": "explores",
+          "target": "explore",
+          "n": 9,
+          "mechanism": "letter-drop"
+        }
+      ]
+    },
+    "transposition": {
+      "total": 227,
+      "top": [
+        {
+          "typo": "clien",
+          "target": "cline",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "moonrepo",
+          "target": "monorepo",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "thersher",
+          "target": "thresher",
+          "n": 8,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "annos",
+          "target": "nanos",
+          "n": 7,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "coreleec",
+          "target": "coreelec",
+          "n": 7,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "jsut",
+          "target": "just",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "perferred",
+          "target": "preferred",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "hmdi",
+          "target": "hdmi",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "unist",
+          "target": "units",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "fdeb",
+          "target": "fedb",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "disbale",
+          "target": "disable",
+          "n": 6,
+          "mechanism": "transposition"
+        },
+        {
+          "typo": "dobly",
+          "target": "dolby",
+          "n": 6,
+          "mechanism": "transposition"
+        }
+      ]
+    },
+    "insertion": {
+      "total": 1470,
+      "top": [
+        {
+          "typo": "includ",
+          "target": "include",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "resol",
+          "target": "resolv",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "disappear",
+          "target": "disappears",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "depenencies",
+          "target": "dependencies",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "deobfuscate",
+          "target": "deobfuscated",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "outpu",
+          "target": "output",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "reactor",
+          "target": "refactor",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "vital",
+          "target": "vitals",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "sessio",
+          "target": "session",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "tostrin",
+          "target": "tostring",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "consol",
+          "target": "console",
+          "n": 9,
+          "mechanism": "insertion"
+        },
+        {
+          "typo": "gayxx",
+          "target": "gayxxx",
+          "n": 9,
+          "mechanism": "insertion"
+        }
+      ]
+    }
+  },
+  "realMobileTypoCount": 13,
+  "topGenuine": [
+    {
+      "typo": "coreleec",
+      "target": "coreelec"
+    },
+    {
+      "typo": "thersher",
+      "target": "thresher"
+    },
+    {
+      "typo": "jsut",
+      "target": "just"
+    },
+    {
+      "typo": "hmdi",
+      "target": "hdmi"
+    },
+    {
+      "typo": "perferred",
+      "target": "preferred"
+    },
+    {
+      "typo": "depenencies",
+      "target": "dependencies"
+    },
+    {
+      "typo": "updste",
+      "target": "update"
+    },
+    {
+      "typo": "coreect",
+      "target": "correct"
+    },
+    {
+      "typo": "outpu",
+      "target": "output"
+    }
+  ]
+}

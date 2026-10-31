@@ -9,3 +9,12 @@
 !docs/**
 !bin/
 !bin/**
+!products/
+!products/**
+!src/
+!src/**
+!tests/
+!tests/**
+!tsconfig.json
+!bunfig.toml
+!bun.lock

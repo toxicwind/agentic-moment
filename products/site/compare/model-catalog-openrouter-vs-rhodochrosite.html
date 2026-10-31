@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model catalog: openrouter dead-lane to rhodochrosite 505</title>
+<style>
+:root{ --ink:#e8e4d8; --dim:#9a9488; --faint:#3a382f; --accent:#c9a227; --red:#b3402e; --bg:#0d0c0a; --card:#141310; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 ui-monospace,monospace;padding:2rem;max-width:1100px;margin:0 auto}
+h1{font-size:1.3rem;color:var(--accent);margin-bottom:.3rem}
+h2{font-size:.95rem;color:var(--dim);margin:1.6rem 0 .6rem;text-transform:uppercase}
+.sub{color:var(--dim);margin-bottom:1.6rem;font-size:.85rem}
+table{border-collapse:collapse;width:100%;font-size:.8rem}
+th,td{border:1px solid var(--faint);padding:.45rem .7rem;text-align:left}
+th{color:var(--dim);font-weight:normal;text-transform:uppercase;font-size:.7rem}
+.dead{color:var(--red)} .alive{color:#7ee787}
+pre{background:var(--card);padding:.8rem;border-radius:6px;font-size:.75rem;overflow-x:auto}
+.rollup{margin-top:1.2rem;color:var(--dim);font-size:.82rem;line-height:1.9}
+.rollup b{color:var(--ink)}
+a{color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.5rem 0}
+.card{background:var(--card);border:1px solid var(--faint);border-radius:6px;padding:1rem}
+.card h3{font-size:.85rem;color:var(--dim);margin-bottom:.5rem;text-transform:uppercase}
+.card .num{font-size:2rem;font-weight:bold;color:var(--accent)}
+</style>
+</head>
+<body>
+<h1>Model catalog: openrouter dead-lane to rhodochrosite 505</h1>
+<p class="sub">2026-10-31 -- tau model discovery repair. Openrouter all nvidia models returned 404. Migrated to rhodochrosite.secure-nim.</p>
+<div class="grid">
+<div class="card"><h3>Openrouter dead-lane</h3><div class="num dead">12</div><div style="font-size:.8rem;color:var(--dim)">Dead models only on openrouter</div></div>
+<div class="card"><h3>Rhodochrosite extra</h3><div class="num alive">97</div><div style="font-size:.8rem;color:var(--dim)">Extra models from rhodochrosite</div></div>
+</div>
+<h2>Variant comparison</h2>
+<table>
+<tr><th>Metric</th><th>openrouter-dead-lane</th><th>rhodochrosite-505</th></tr>
+<tr><td>Total models</td><td>420</td><td class="alive">505</td></tr>
+<tr><td>Bytes</td><td>248932</td><td>132694</td></tr>
+<tr><td>NVIDIA models</td><td class="dead">12</td><td class="alive">18</td></tr>
+<tr><td>Nemotron models</td><td class="dead">0</td><td class="alive">15</td></tr>
+<tr><td>Model overlap</td><td colspan="2">408</td></tr>
+</table>
+<h2>Dead models (all returned HTTP 404)</h2>
+<pre>
+openrouter/nvidia/nemotron-3-super-120b-a12b:free       -> 404
+openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free -> 404
+openrouter/nvidia/nemotron-3-ultra-550b-a55b:free       -> 404
+openrouter/inclusionai/ling-3.0-flash-fin:free          -> 404
+openrouter/nvidia/nemotron-3.5-lightning:free           -> 404
+openrouter/nvidia/nemotron-3-super-120b-a12b            -> 404
+openrouter/nvidia/nemotron-3-ultra-550b-a55b            -> 404
+openrouter/inclusionai/ling-3.0-flash-fin               -> 404
+</pre>
+<h2>Fixed modelRoles</h2>
+<table>
+<tr><th>Role</th><th>Before</th><th>After</th></tr>
+<tr><td>advisor</td><td class="dead">openrouter/nvidia/nemotron-3-super-120b-a12b:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-super-vl-120b-a12b</td></tr>
+<tr><td>plan</td><td class="dead">openrouter/nvidia/nemotron-3-super-120b-a12b:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-super-vl-120b-a12b</td></tr>
+<tr><td>judge</td><td class="dead">openrouter/nvidia/nemotron-3-super-120b-a12b:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-super-vl-120b-a12b</td></tr>
+<tr><td>task</td><td class="dead">openrouter/nvidia/nemotron-3.5-lightning:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-lightning-30b-a3b</td></tr>
+<tr><td>verification</td><td class="dead">openrouter/nvidia/nemotron-3.5-lightning:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-lightning-30b-a3b</td></tr>
+<tr><td>vision</td><td class="dead">openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3.5-lightning-30b-a3b</td></tr>
+<tr><td>slow</td><td class="dead">openrouter/nvidia/nemotron-3-ultra-550b-a55b:free</td><td class="alive">rhodochrosite.secure-nim/nvidia/nemotron-3-ultra-550b-a55b</td></tr>
+<tr><td>default</td><td class="dead">google-antigravity/gemini-3.8-flash</td><td class="alive">freeinference/glm-5.3-flash</td></tr>
+</table>
+<h2>Verified completions</h2>
+<pre>
+Advisor (nemotron-3.5-super-vl-120b-a12b): max_tokens=2500 thinking.enabled
+  Response: "Test received! I'm working."
+  Tokens: total=74, content=57, reasoning=41
+Task (nemotron-3.5-lightning-30b-a3b): max_tokens=50
+  Tokens: total=67, content=50
+Default (glm-5.3-flash): freeinference HTTP 200 in 0.21s
+</pre>
+<h2>Root cause</h2>
+<p class="rollup">
+All openrouter/nvidia/* and openrouter/inclusionai/* modelRoles returned HTTP 404.
+Migrated to rhodochrosite.secure-nim/nvidia/* (NVIDIA NIM).
+Rhodochrosite: 505 models, 15 nemotrons. Openrouter: 420 models, 9 dead nvidia.
+</p>
+<p style="margin-top:2rem"><a href="index.html">back to compare lab</a></p>
+</body></html>

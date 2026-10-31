@@ -1,0 +1,699 @@
+{
+  "variants": [
+    {
+      "name": "us-all",
+      "bytes": 21731,
+      "lines": 849,
+      "hash": "5e933722"
+    },
+    {
+      "name": "martingeidobler",
+      "bytes": 24359,
+      "lines": 711,
+      "hash": "57d387ee"
+    },
+    {
+      "name": "dockndevai",
+      "bytes": 2666,
+      "lines": 73,
+      "hash": "bc387e41"
+    }
+  ],
+  "pairs": [
+    {
+      "a": "us-all",
+      "b": "martingeidobler",
+      "tokenJaccard": 0.014590347923681257,
+      "astJaccard": 0.027559055118110236,
+      "semanticRatio": 0.050468637346791634,
+      "changedLines": [
+        {
+          "kind": "removed",
+          "a": "import { readFileSync } from \"node:fs\";"
+        },
+        {
+          "kind": "removed",
+          "a": "import { fileURLToPath } from \"node:url\";"
+        },
+        {
+          "kind": "removed",
+          "a": "import { dirname, join } from \"node:path\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { startMcpServer } from \"@us-all/mcp-toolkit/runtime\";",
+          "b": "import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { inferToolAnnotations } from \"@us-all/mcp-toolkit\";",
+          "b": "import { z } from \"zod\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { validateConfig } from \"./config.js\";",
+          "b": "import sharp from \"sharp\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { wrapToolHandler, wrapImageToolHandler } from \"./tools/utils.js\";",
+          "b": "import { Adb } from \"./adb.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "const pkgPath = join(dirname(fileURLToPath(import.meta.url)), \"..\", \"package.json\");",
+          "b": "const adb = new Adb();"
+        },
+        {
+          "kind": "modified",
+          "a": "const { version: pkgVersion } = JSON.parse(readFileSync(pkgPath, \"utf-8\")) as { version: string };",
+          "b": "const KEYCODE_MAP: Record<string, number> = {"
+        },
+        {
+          "kind": "modified",
+          "a": "// Device tools",
+          "b": "  back: 4,"
+        },
+        {
+          "kind": "modified",
+          "a": "import {",
+          "b": "  home: 3,"
+        },
+        {
+          "kind": "modified",
+          "a": "  listDevicesSchema,",
+          "b": "  enter: 66,"
+        },
+        {
+          "kind": "modified",
+          "a": "  listDevices,",
+          "b": "  tab: 61,"
+        },
+        {
+          "kind": "modified",
+          "a": "  getDeviceInfoSchema,",
+          "b": "  delete: 67,"
+        },
+        {
+          "kind": "modified",
+          "a": "  getDeviceInfo,",
+          "b": "  menu: 82,"
+        },
+        {
+          "kind": "modified",
+          "a": "  getDevicePropertiesSchema,",
+          "b": "  recent_apps: 187,"
+        },
+        {
+          "kind": "modified",
+          "a": "  getDeviceProperties,",
+          "b": "  volume_up: 24,"
+        },
+        {
+          "kind": "modified",
+          "a": "  connectDeviceSchema,",
+          "b": "  volume_down: 25,"
+        },
+        {
+          "kind": "modified",
+          "a": "  connectDevice,",
+          "b": "  power: 26,"
+        },
+        {
+          "kind": "modified",
+          "a": "  disconnectDeviceSchema,",
+          "b": "  search: 84,"
+        },
+        {
+          "kind": "modified",
+          "a": "  disconnectDevice,",
+          "b": "  dpad_up: 19,"
+        },
+        {
+          "kind": "modified",
+          "a": "} from \"./tools/device.js\";",
+          "b": "  dpad_down: 20,"
+        },
+        {
+          "kind": "modified",
+          "a": "// App tools",
+          "b": "  dpad_left: 21,"
+        },
+        {
+          "kind": "modified",
+          "a": "import {",
+          "b": "  dpad_right: 22,"
+        },
+        {
+          "kind": "modified",
+          "a": "  listPackagesSchema,",
+          "b": "  dpad_center: 23,"
+        },
+        {
+          "kind": "modified",
+          "a": "  listPackages,",
+          "b": "};"
+        },
+        {
+          "kind": "modified",
+          "a": "  getPackageInfoSchema,",
+          "b": "async function compressScreenshot(pngBuffer: Buffer, maxWidth = 1280): Promise<Buffer> {"
+        },
+        {
+          "kind": "modified",
+          "a": "  getPackageInfo,",
+          "b": "  const image = sharp(pngBuffer);"
+        },
+        {
+          "kind": "modified",
+          "a": "  installAppSchema,",
+          "b": "  const metadata = await image.metadata();"
+        },
+        {
+          "kind": "modified",
+          "a": "  installApp,",
+          "b": "  if (metadata.width && metadata.width > maxWidth) {"
+        },
+        {
+          "kind": "modified",
+          "a": "  uninstallAppSchema,",
+          "b": "    return image.resize({ width: maxWidth }).png({ quality: 80 }).toBuffer();"
+        },
+        {
+          "kind": "modified",
+          "a": "  uninstallApp,",
+          "b": "  }"
+        },
+        {
+          "kind": "modified",
+          "a": "  launchAppSchema,",
+          "b": "  return image.png({ quality: 80 }).toBuffer();"
+        },
+        {
+          "kind": "modified",
+          "a": "  launchApp,",
+          "b": "}"
+        },
+        {
+          "kind": "removed",
+          "a": "  stopAppSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  stopApp,"
+        },
+        {
+          "kind": "removed",
+          "a": "  clearAppDataSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  clearAppData,"
+        },
+        {
+          "kind": "removed",
+          "a": "  grantPermissionSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  grantPermission,"
+        },
+        {
+          "kind": "removed",
+          "a": "  revokePermissionSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  revokePermission,"
+        },
+        {
+          "kind": "removed",
+          "a": "  openUrlSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  openUrl,"
+        },
+        {
+          "kind": "removed",
+          "a": "  sendBroadcastSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  sendBroadcast,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getCurrentActivitySchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getCurrentActivity,"
+        },
+        {
+          "kind": "removed",
+          "a": "  isAppInstalledSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  isAppInstalled,"
+        }
+      ],
+      "bytesA": 21731,
+      "bytesB": 24359
+    },
+    {
+      "a": "us-all",
+      "b": "dockndevai",
+      "tokenJaccard": 0.011608623548922056,
+      "astJaccard": 0.03067484662576687,
+      "semanticRatio": 0.015170670037926675,
+      "changedLines": [
+        {
+          "kind": "modified",
+          "a": "import { readFileSync } from \"node:fs\";",
+          "b": "import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { fileURLToPath } from \"node:url\";",
+          "b": "import { loadConfig } from \"./config.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { dirname, join } from \"node:path\";",
+          "b": "import { buildServer } from \"./server.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";",
+          "b": "async function main(): Promise<void> {"
+        },
+        {
+          "kind": "modified",
+          "a": "import { startMcpServer } from \"@us-all/mcp-toolkit/runtime\";",
+          "b": "  let config;"
+        },
+        {
+          "kind": "removed",
+          "a": "import { inferToolAnnotations } from \"@us-all/mcp-toolkit\";"
+        },
+        {
+          "kind": "removed",
+          "a": "import { validateConfig } from \"./config.js\";"
+        },
+        {
+          "kind": "removed",
+          "a": "import { wrapToolHandler, wrapImageToolHandler } from \"./tools/utils.js\";"
+        },
+        {
+          "kind": "removed",
+          "a": "const pkgPath = join(dirname(fileURLToPath(import.meta.url)), \"..\", \"package.json\");"
+        },
+        {
+          "kind": "removed",
+          "a": "const { version: pkgVersion } = JSON.parse(readFileSync(pkgPath, \"utf-8\")) as { version: string };"
+        },
+        {
+          "kind": "removed",
+          "a": "// Device tools"
+        },
+        {
+          "kind": "removed",
+          "a": "import {"
+        },
+        {
+          "kind": "removed",
+          "a": "  listDevicesSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  listDevices,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getDeviceInfoSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getDeviceInfo,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getDevicePropertiesSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getDeviceProperties,"
+        },
+        {
+          "kind": "removed",
+          "a": "  connectDeviceSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  connectDevice,"
+        },
+        {
+          "kind": "removed",
+          "a": "  disconnectDeviceSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  disconnectDevice,"
+        },
+        {
+          "kind": "removed",
+          "a": "} from \"./tools/device.js\";"
+        },
+        {
+          "kind": "removed",
+          "a": "// App tools"
+        },
+        {
+          "kind": "removed",
+          "a": "import {"
+        },
+        {
+          "kind": "removed",
+          "a": "  listPackagesSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  listPackages,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getPackageInfoSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getPackageInfo,"
+        },
+        {
+          "kind": "removed",
+          "a": "  installAppSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  installApp,"
+        },
+        {
+          "kind": "removed",
+          "a": "  uninstallAppSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  uninstallApp,"
+        },
+        {
+          "kind": "removed",
+          "a": "  launchAppSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  launchApp,"
+        },
+        {
+          "kind": "removed",
+          "a": "  stopAppSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  stopApp,"
+        },
+        {
+          "kind": "removed",
+          "a": "  clearAppDataSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  clearAppData,"
+        },
+        {
+          "kind": "removed",
+          "a": "  grantPermissionSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  grantPermission,"
+        },
+        {
+          "kind": "removed",
+          "a": "  revokePermissionSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  revokePermission,"
+        },
+        {
+          "kind": "removed",
+          "a": "  openUrlSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  openUrl,"
+        },
+        {
+          "kind": "removed",
+          "a": "  sendBroadcastSchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  sendBroadcast,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getCurrentActivitySchema,"
+        },
+        {
+          "kind": "removed",
+          "a": "  getCurrentActivity,"
+        },
+        {
+          "kind": "removed",
+          "a": "  isAppInstalledSchema,"
+        }
+      ],
+      "bytesA": 21731,
+      "bytesB": 2666
+    },
+    {
+      "a": "martingeidobler",
+      "b": "dockndevai",
+      "tokenJaccard": 0.028277634961439587,
+      "astJaccard": 0.06031746031746032,
+      "semanticRatio": 0.030555555555555555,
+      "changedLines": [
+        {
+          "kind": "removed",
+          "a": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { z } from \"zod\";",
+          "b": "import { loadConfig } from \"./config.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import sharp from \"sharp\";",
+          "b": "import { buildServer } from \"./server.js\";"
+        },
+        {
+          "kind": "modified",
+          "a": "import { Adb } from \"./adb.js\";",
+          "b": "async function main(): Promise<void> {"
+        },
+        {
+          "kind": "modified",
+          "a": "const adb = new Adb();",
+          "b": "  let config;"
+        },
+        {
+          "kind": "removed",
+          "a": "const KEYCODE_MAP: Record<string, number> = {"
+        },
+        {
+          "kind": "removed",
+          "a": "  back: 4,"
+        },
+        {
+          "kind": "removed",
+          "a": "  home: 3,"
+        },
+        {
+          "kind": "removed",
+          "a": "  enter: 66,"
+        },
+        {
+          "kind": "removed",
+          "a": "  tab: 61,"
+        },
+        {
+          "kind": "removed",
+          "a": "  delete: 67,"
+        },
+        {
+          "kind": "removed",
+          "a": "  menu: 82,"
+        },
+        {
+          "kind": "removed",
+          "a": "  recent_apps: 187,"
+        },
+        {
+          "kind": "removed",
+          "a": "  volume_up: 24,"
+        },
+        {
+          "kind": "removed",
+          "a": "  volume_down: 25,"
+        },
+        {
+          "kind": "removed",
+          "a": "  power: 26,"
+        },
+        {
+          "kind": "removed",
+          "a": "  search: 84,"
+        },
+        {
+          "kind": "removed",
+          "a": "  dpad_up: 19,"
+        },
+        {
+          "kind": "removed",
+          "a": "  dpad_down: 20,"
+        },
+        {
+          "kind": "removed",
+          "a": "  dpad_left: 21,"
+        },
+        {
+          "kind": "removed",
+          "a": "  dpad_right: 22,"
+        },
+        {
+          "kind": "removed",
+          "a": "  dpad_center: 23,"
+        },
+        {
+          "kind": "removed",
+          "a": "};"
+        },
+        {
+          "kind": "removed",
+          "a": "async function compressScreenshot(pngBuffer: Buffer, maxWidth = 1280): Promise<Buffer> {"
+        },
+        {
+          "kind": "removed",
+          "a": "  const image = sharp(pngBuffer);"
+        },
+        {
+          "kind": "removed",
+          "a": "  const metadata = await image.metadata();"
+        },
+        {
+          "kind": "removed",
+          "a": "  if (metadata.width && metadata.width > maxWidth) {"
+        },
+        {
+          "kind": "removed",
+          "a": "    return image.resize({ width: maxWidth }).png({ quality: 80 }).toBuffer();"
+        },
+        {
+          "kind": "removed",
+          "a": "  }"
+        },
+        {
+          "kind": "removed",
+          "a": "  return image.png({ quality: 80 }).toBuffer();"
+        },
+        {
+          "kind": "removed",
+          "a": "}"
+        },
+        {
+          "kind": "removed",
+          "a": "const server = new McpServer({"
+        },
+        {
+          "kind": "removed",
+          "a": "  name: \"android\","
+        },
+        {
+          "kind": "removed",
+          "a": "  version: \"1.0.0\","
+        },
+        {
+          "kind": "removed",
+          "a": "});"
+        },
+        {
+          "kind": "removed",
+          "a": "// --- Device Management ---"
+        },
+        {
+          "kind": "removed",
+          "a": "server.tool(\"list_devices\", \"List connected Android devices and emulators\", {}, async () => {"
+        },
+        {
+          "kind": "removed",
+          "a": "  const devices = await adb.getDevices();"
+        },
+        {
+          "kind": "removed",
+          "a": "  if (devices.length === 0) {"
+        },
+        {
+          "kind": "removed",
+          "a": "    return {"
+        },
+        {
+          "kind": "removed",
+          "a": "      content: ["
+        },
+        {
+          "kind": "removed",
+          "a": "        {"
+        },
+        {
+          "kind": "removed",
+          "a": "          type: \"text\","
+        },
+        {
+          "kind": "removed",
+          "a": "          text: \"No devices connected. Use list_avds to see available emulators, then start_emulator to launch one.\","
+        },
+        {
+          "kind": "removed",
+          "a": "        },"
+        },
+        {
+          "kind": "removed",
+          "a": "      ],"
+        },
+        {
+          "kind": "removed",
+          "a": "    };"
+        },
+        {
+          "kind": "removed",
+          "a": "  }"
+        },
+        {
+          "kind": "removed",
+          "a": "  return {"
+        },
+        {
+          "kind": "removed",
+          "a": "    content: ["
+        }
+      ],
+      "bytesA": 24359,
+      "bytesB": 2666
+    }
+  ],
+  "identicalGroups": [],
+  "canonicalGuess": "martingeidobler"
+}

@@ -1,0 +1,257 @@
+{
+  "variants": [
+    {
+      "name": "old-site-vendor",
+      "bytes": 7883,
+      "lines": 48,
+      "hash": "45da109c"
+    },
+    {
+      "name": "trio-canonical",
+      "bytes": 14119,
+      "lines": 385,
+      "hash": "f7ea7bd8"
+    }
+  ],
+  "pairs": [
+    {
+      "a": "old-site-vendor",
+      "b": "trio-canonical",
+      "tokenJaccard": 0.009375,
+      "astJaccard": 0.20833333333333334,
+      "semanticRatio": 0.020151133501259445,
+      "changedLines": [
+        {
+          "kind": "modified",
+          "a": "function O(r){let n=2166136261;for(let e=0;e<r.length;e++)n^=r.charCodeAt(e),n=Math.imul(n,16777619);return(n>>>0).toString(16).padStart(8,\"0\")}function b(r){return r.trim().replace(/['\"`]/g,'\"').replace(/\\s+/g,\" \")}function F(r,n){if(r.size===0&&n.size===0)return 1;let e=0;for(let c of r)if(n.has(c))e++;let s=r.size+n.size-e;return s===0?1:e/s}function G(r){return new Set(r.split(`",
+          "b": "/**"
+        },
+        {
+          "kind": "modified",
+          "a": "`).map(b).filter((n)=>n.length>0))}function V(r){let n=new Set;for(let e of r.split(`",
+          "b": " * compare.ts — algorithmic repo/variant comparison for trio."
+        },
+        {
+          "kind": "modified",
+          "a": "`)){let s=b(e),c=s.match(/(?:^|\\})\\s*(?:import\\s+[^\"']*?\\s*from\\s*|import\\s*|require\\s*\\(\\s*|import\\s*\\(\\s*)[\"']([^\"']+)[\"']/);if(c)n.add(c[1]);else{let o=s.match(/import\\s*\\(\\s*[\"']([^\"']+)[\"']\\s*\\)/);if(o)n.add(o[1])}}return[...n]}function I(r){let n=new Set;for(let e of V(r)){let s=e.match(/[\"']?([\\w./@-]+)[\"']?$/),c=s?s[1]:e,o=new Set;for(let m of r.split(`",
+          "b": " *"
+        },
+        {
+          "kind": "modified",
+          "a": "`)){let i=b(m),a=i.match(/import\\s*{([^}]*)}\\s*from/);if(a&&i.includes(c))for(let u of a[1].split(\",\")){let t=u.trim().split(/\\s+as\\s+/).pop()?.trim();if(t)o.add(t)}}if(o.size>0)for(let m of o)n.add(`dep ${c}:${m}`);else n.add(`dep ${c}`)}for(let e of r.split(`",
+          "b": " * Three metric layers over N source variants:"
+        },
+        {
+          "kind": "modified",
+          "a": "`)){let s=b(e);if(!s)continue;if(s.startsWith(\"import \")||s.startsWith(\"} from\"))n.add(`import ${s}`);let c=s.match(/(?:async\\s+)?(?:function|const|let|var|class)\\s+([A-Za-z_$][\\w$]*)/);if(c)n.add(`decl ${c[1]}`);for(let o of s.matchAll(/([A-Za-z_$][\\w$]*)\\(/g))n.add(`call ${o[1]}`);for(let o of e.matchAll(/\"([^\"]{2,})\"/g))n.add(`str ${b(o[1])}`)}return n}function D(r,n){let e=(s)=>s.replace(/:\\s*[\\w[\\]<>,.\\s{}|]+/g,\"\").replace(/\\s+/g,\"\");return e(r)===e(n)}function U(r,n){let e=b(r),s=b(n);if(e===s)return\"modified\";let c=(o)=>o.replace(/@\\/|#\\//g,\"P/\");if(c(e)===c(s)&&(e.includes(\"@/\")||e.includes(\"#/\")))return\"import-alias\";if(D(e,s))return\"type-annotation\";return\"modified\"}function W(r,n){let e=r.split(`",
+          "b": " *   1. token:     normalized-line shingles → Jaccard similarity"
+        },
+        {
+          "kind": "modified",
+          "a": "`).map(b).filter(Boolean),s=n.split(`",
+          "b": " *   2. ast:       structural signature (imports, declarations, calls, strings)"
+        },
+        {
+          "kind": "modified",
+          "a": "`).map(b).filter(Boolean),c=e.length+s.length;if(c===0)return 1;let o=0;while(o<e.length&&o<s.length&&e[o]===s[o])o++;let m=0;while(m<e.length-o&&m<s.length-o&&e[e.length-1-m]===s[s.length-1-m])m++;let i=e.slice(o,e.length-m),a=s.slice(o,s.length-m),u=o+m;if(i.length===0||a.length===0)return 2*u/c;let t=(h)=>{let w=2166136261;for(let R=0;R<h.length;R++)w^=h.charCodeAt(R),w=Math.imul(w,16777619);return w>>>0},l=Int32Array.from(i,t),d=Int32Array.from(a,t),x=i.length,y=a.length,M=new Uint32Array((x+1)*(y+1)),T=(h,w)=>h*(y+1)+w;for(let h=x-1;h>=0;h--){let w=l[h],R=h*(y+1),L=(h+1)*(y+1);for(let g=y-1;g>=0;g--)M[R+g]=w===d[g]?M[L+g+1]+1:Math.max(M[L+g],M[R+g+1])}return 2*(u+M[0])/c}function N(r,n){let e=r.source.split(`",
+          "b": " *                 → signature Jaccard, invariant to quote/whitespace style"
+        },
+        {
+          "kind": "modified",
+          "a": "`),s=n.source.split(`",
+          "b": " *   3. semantic:  LCS over normalized lines → ratio (2·LCS / (n+m))"
+        },
+        {
+          "kind": "modified",
+          "a": "`),c=e.map(b).filter(Boolean),o=s.map(b).filter(Boolean),m=e.filter((f)=>b(f).length>0),i=s.filter((f)=>b(f).length>0),a=c.length,u=o.length,t=0;while(t<a&&t<u&&c[t]===o[t])t++;let l=0;while(l<a-t&&l<u-t&&c[a-1-l]===o[u-1-l])l++;let d=c.slice(t,a-l),x=o.slice(t,u-l),y=m.slice(t,a-l),M=i.slice(t,u-l),T=d.length,h=x.length,w=(f)=>{let z=2166136261;for(let A=0;A<f.length;A++)z^=f.charCodeAt(A),z=Math.imul(z,16777619);return z>>>0},R=Int32Array.from(d,w),L=Int32Array.from(x,w),g=[],J=t+l;if(T===0||h===0){for(let f of y)g.push({kind:\"removed\",a:f});for(let f of M)g.push({kind:\"added\",b:f})}else{let f=new Uint32Array((T+1)*(h+1)),z=T*(h+1);for(let C=T-1;C>=0;C--){let p=R[C],q=C*(h+1),E=(C+1)*(h+1);for(let S=h-1;S>=0;S--)f[q+S]=p===L[S]?f[E+S+1]+1:Math.max(f[E+S],f[q+S+1])}J+=f[0];let A=[],P=[],H=()=>{let C=Math.min(A.length,P.length);for(let p=0;p<C;p++)g.push({kind:U(A[p],P[p]),a:A[p],b:P[p]});for(let p=C;p<A.length;p++)g.push({kind:\"removed\",a:A[p]});for(let p=C;p<P.length;p++)g.push({kind:\"added\",b:P[p]});A=[],P=[]},B=0,k=0;while(B<T&&k<h){if(R[B]===L[k]){H(),B++,k++;continue}if(f[(B+1)*(h+1)+k]>=f[B*(h+1)+k+1])A.push(y[B]),B++;else P.push(M[k]),k++}while(B<T)A.push(y[B]),B++;while(k<h)P.push(M[k]),k++;H()}let j=a+u;return{a:r.name,b:n.name,tokenJaccard:F(G(r.source),G(n.source)),astJaccard:F(I(r.source),I(n.source)),semanticRatio:j===0?1:2*J/j,changedLines:g.slice(0,50),bytesA:r.source.length,bytesB:n.source.length}}function Z(r){let n=r.map((i)=>O(i.source)),e=[];for(let i=0;i<r.length;i++)for(let a=i+1;a<r.length;a++)e.push(N(r[i],r[a]));let s=new Map;r.forEach((i,a)=>s.set(n[a],[...s.get(n[a])??[],i.name]));let c=[...s.values()].filter((i)=>i.length>1),o=null,m=-1;for(let i of r){let a=e.filter((t)=>t.a===i.name||t.b===i.name);if(a.length===0)continue;let u=a.reduce((t,l)=>t+l.semanticRatio,0)/a.length;if(u>m)m=u,o=i.name}return{variants:r.map((i,a)=>({name:i.name,bytes:i.source.length,lines:i.source.split(`",
+          "b": " *"
+        },
+        {
+          "kind": "modified",
+          "a": "`).length,hash:n[a]})),pairs:e,identicalGroups:c,canonicalGuess:o}}function _(r,n){let e=new Map(r.map((t)=>[t.path,t.source])),s=new Map(n.map((t)=>[t.path,t.source])),c=[...new Set([...e.keys(),...s.keys()])].sort(),o=[];for(let t of c){let l=e.get(t),d=s.get(t),x=l!==void 0&&d!==void 0?\"both\":l!==void 0?\"only-a\":\"only-b\",y=N({name:`${t}:a`,source:l??\"\"},{name:`${t}:b`,source:d??\"\"});o.push({...y,path:t,relation:x})}let m=o.filter((t)=>t.relation===\"both\"),i=m.filter((t)=>t.tokenJaccard===1&&t.semanticRatio===1).length,a=m.filter((t)=>t.semanticRatio<1),u=(t)=>t.length===0?1:t.reduce((l,d)=>l+d,0)/t.length;return o.sort((t,l)=>{let d=t.relation===\"both\"?0:1,x=l.relation===\"both\"?0:1;if(d!==x)return d-x;if(d===1)return t.path.localeCompare(l.path);return t.semanticRatio-l.semanticRatio}),{rollup:{filesA:r.length,filesB:n.length,paired:m.length,onlyA:o.filter((t)=>t.relation===\"only-a\").length,onlyB:o.filter((t)=>t.relation===\"only-b\").length,identical:i,semanticDrift:u(a.map((t)=>t.semanticRatio)),meanToken:u(m.map((t)=>t.tokenJaccard)),meanAst:u(m.map((t)=>t.astJaccard))},files:o}}export{I as astSignature,Z as compare,N as comparePair,_ as compareTrees,V as extractDeps,O as fnv1a,b as normLine,W as semanticRatio};",
+          "b": " * Per-pair changedLines categorizes edits: import-alias, type-annotation,"
+        },
+        {
+          "kind": "modified",
+          "a": "const taA = document.getElementById('taA'), taB = document.getElementById('taB');",
+          "b": " * modified, removed, added. Type-annotation detection compares the two lines"
+        },
+        {
+          "kind": "modified",
+          "a": "const demo = `import { createFileRoute } from '@tanstack/react-router'",
+          "b": " * with ALL whitespace removed after stripping the `: type` segment — the strip"
+        },
+        {
+          "kind": "modified",
+          "a": "import { geminiText } from '@tanstack/ai-gemini'",
+          "b": " * regex can eat boundary spaces, so whitespace-sensitive comparison"
+        },
+        {
+          "kind": "modified",
+          "a": "} from '#/lib/conference-tools'",
+          "b": " * false-negatives (the 2026-10-30 TDD round-trip proved this three ways)."
+        },
+        {
+          "kind": "modified",
+          "a": "let provider = 'ollama'`;",
+          "b": " *"
+        },
+        {
+          "kind": "modified",
+          "a": "const demo2 = demo.replace(\"@/\", \"@/\").replace(\"#/lib\", \"@/lib\").replace(\"let provider = \", \"let provider: string = \");",
+          "b": " * Pure functions, no I/O — callers pass file contents in."
+        },
+        {
+          "kind": "modified",
+          "a": "if (!taA.value) { taA.value = demo; taB.value = demo2; }",
+          "b": " */"
+        },
+        {
+          "kind": "modified",
+          "a": "document.getElementById('go').onclick = () => {",
+          "b": "export interface Variant {"
+        },
+        {
+          "kind": "modified",
+          "a": "  const a = { name: \"A\", source: taA.value }, b = { name: \"B\", source: taB.value };",
+          "b": "\tname: string;"
+        },
+        {
+          "kind": "modified",
+          "a": "  const t0 = performance.now();",
+          "b": "\tsource: string;"
+        },
+        {
+          "kind": "removed",
+          "a": "  const p = comparePair(a, b);"
+        },
+        {
+          "kind": "removed",
+          "a": "  const ms = (performance.now() - t0).toFixed(1);"
+        },
+        {
+          "kind": "removed",
+          "a": "  document.getElementById('status').textContent = `${ms} ms · token ${p.tokenJaccard.toFixed(3)} · ast ${p.astJaccard.toFixed(3)} · semantic ${p.semanticRatio.toFixed(3)}`;"
+        },
+        {
+          "kind": "removed",
+          "a": "  let html = `<details open><summary>changed lines (${p.changedLines.length})</summary><div class=\"diff\">`;"
+        },
+        {
+          "kind": "removed",
+          "a": "  for (const c of p.changedLines) {"
+        },
+        {
+          "kind": "removed",
+          "a": "    const label = c.kind.toUpperCase();"
+        },
+        {
+          "kind": "removed",
+          "a": "    if (c.kind === 'removed') html += `<div class=\"kind-removed\">− ${escapeH(c.a)}</div>`;"
+        },
+        {
+          "kind": "removed",
+          "a": "    else if (c.kind === 'added') html += `<div style=\"color:#7ee787\">+ ${escapeH(c.b)}</div>`;"
+        },
+        {
+          "kind": "removed",
+          "a": "    else html += `<div class=\"kind-${c.kind}\">~ ${label}: ${escapeH(c.a)} ⇒ ${escapeH(c.b)}</div>`;"
+        },
+        {
+          "kind": "modified",
+          "a": "  html += `</div></details>`;",
+          "b": "export interface ChangedLine {"
+        },
+        {
+          "kind": "modified",
+          "a": "  document.getElementById('out').innerHTML = html;",
+          "b": "\tkind: \"import-alias\" | \"type-annotation\" | \"modified\" | \"removed\" | \"added\";"
+        },
+        {
+          "kind": "added",
+          "b": "\ta?: string;"
+        },
+        {
+          "kind": "added",
+          "b": "\tb?: string;"
+        },
+        {
+          "kind": "added",
+          "b": "}"
+        },
+        {
+          "kind": "added",
+          "b": "export interface PairMetric {"
+        },
+        {
+          "kind": "added",
+          "b": "\ta: string;"
+        },
+        {
+          "kind": "added",
+          "b": "\tb: string;"
+        },
+        {
+          "kind": "added",
+          "b": "\ttokenJaccard: number;"
+        },
+        {
+          "kind": "added",
+          "b": "\tastJaccard: number;"
+        },
+        {
+          "kind": "added",
+          "b": "\tsemanticRatio: number;"
+        },
+        {
+          "kind": "added",
+          "b": "\tchangedLines: ChangedLine[];"
+        },
+        {
+          "kind": "added",
+          "b": "\tbytesA: number;"
+        },
+        {
+          "kind": "added",
+          "b": "\tbytesB: number;"
+        },
+        {
+          "kind": "added",
+          "b": "}"
+        },
+        {
+          "kind": "added",
+          "b": "export interface CompareReport {"
+        },
+        {
+          "kind": "added",
+          "b": "\tvariants: Array<{ name: string; bytes: number; lines: number; hash: string }>;"
+        },
+        {
+          "kind": "added",
+          "b": "\tpairs: PairMetric[];"
+        },
+        {
+          "kind": "added",
+          "b": "\tidenticalGroups: string[][];"
+        },
+        {
+          "kind": "added",
+          "b": "\tcanonicalGuess: string | null;"
+        },
+        {
+          "kind": "added",
+          "b": "}"
+        }
+      ],
+      "bytesA": 7883,
+      "bytesB": 14119
+    }
+  ],
+  "identicalGroups": [],
+  "canonicalGuess": "old-site-vendor",
+  "_provenance": {
+    "source": "repo-compare (trio)",
+    "capturedAt": "2026-10-31T04:56:08.732Z"
+  }
+}

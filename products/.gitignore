@@ -1,0 +1,16 @@
+*
+!audit/
+!audit/**
+!site/
+!site/**
+!src/
+!src/**
+!docs/
+!docs/**
+!bin/
+!bin/**
+!tests/
+!tests/**
+!package.json
+!README.md
+!AGENTS.md
