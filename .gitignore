@@ -10,8 +10,6 @@
 !docs/**
 !bin/
 !bin/**
-!products/
-!products/**
 !src/
 !src/**
 !tests/
